@@ -8,7 +8,6 @@ router.post('/', async (req, res) => {
     // Check if image is provided
     let image_upload = null;
     if (req.file) {
-      // Convert image buffer to Base64 string
       image_upload = req.file.buffer.toString('base64');
     }
 
