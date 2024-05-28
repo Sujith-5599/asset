@@ -25,7 +25,7 @@ const Asset = sequelize.define('Asset', {
     defaultValue: true
   },
   image_upload: {
-    type: DataTypes.TEXT, // Changed to TEXT to store Base64 string
+    type: DataTypes.TEXT, 
     allowNull: true
   }
 });
