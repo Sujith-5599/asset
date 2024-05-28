@@ -27,17 +27,17 @@ html(lang="en")
       table {
         width: 100%;
         margin-top: 20px;
-        table-layout: fixed; /* Ensure table cells have a fixed width */
+        table-layout: fixed;
       }
       th, td {
         padding: 10px;
         text-align: left;
-        overflow: hidden; /* Prevent text overflow */
-        text-overflow: ellipsis; /* Add ellipsis for overflow text */
-        white-space: nowrap; /* Prevent text wrap */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       th.actions, td.product-details {
-        width: 220px; /* Adjust width as needed for actions column */
+        width: 220px;
       }
       .product-image img {
         max-width: 100px;
@@ -45,11 +45,11 @@ html(lang="en")
       }
       .btn-group {
         display: flex;
-        flex-direction: column; /* Stack buttons vertically */
+        flex-direction: column; 
         gap: 10px;
       }
       .btn-group button, .btn-group form {
-        width: 100%; /* Ensure buttons and forms use full width */
+        width: 100%;
       }
   body
     header
@@ -87,7 +87,7 @@ html(lang="en")
               td.product-details
                 .btn-group
                   if asset.available
-                    //- Only show the buy button if the asset is available
+                    
                     button.btn.btn-primary(type='button', onclick=`showBuyInput('${asset.unique_id}')`) Buy
                     div(id=`buyInputDiv-${asset.unique_id}`, style='display:none; margin-top:10px;')
                       form(action=`/buy/${asset.unique_id}`, method='post')
