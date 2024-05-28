@@ -1,0 +1,44 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Update Employee
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+      .form-container {
+        margin-top: 20px;
+      }
+  body
+    .container
+      h1 Update Employee
+      .form-container
+        form(action=`/editemployeedetails/${employee.id}/update`, method="post")
+          .form-group
+            label(for="employee_name") Employee Name:
+            input.form-control(type="text", id="employee_name", name="employee_name", value=employee.employee_name, required)
+          .form-group
+            label(for="product_name") Product Name:
+            input.form-control(type="text", id="product_name", name="product_name", value=employee.product_name, required)
+          .form-group
+            input.btn.btn-primary(type="submit", value="Update Employee")
+    
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")

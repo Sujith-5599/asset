@@ -1,0 +1,49 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Update Asset
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      .form-container {
+        margin-top: 20px;
+      }
+  body
+    .container
+      h1 Update Asset
+      .form-container
+        form(action=`/editassetdetails/${asset.unique_id}/update`, method="post")
+          .form-group
+            label(for="product_name") Product Name:
+            input.form-control(type="text", id="product_name", name="product_name", value=asset.product_name, required)
+          .form-group
+            label(for="description") Description:
+            input.form-control(type="text", id="description", name="description", value=asset.description, required)
+          .form-group
+            label(for="stock") Stock:
+            input.form-control(type="number", id="stock", name="stock", value=asset.stock, required)
+          .form-group.form-check
+            input.form-check-input(type="checkbox", id="available", name="available", checked=asset.available)
+            label.form-check-label(for="available") Available
+          .form-group
+            input.btn.btn-primary(type="submit", value="Update Asset")
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")

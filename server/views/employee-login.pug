@@ -1,0 +1,52 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Employee Login
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
+    style.
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        max-width: 400px;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      h1 {
+        margin-bottom: 20px;
+        font-weight: 600;
+        color: #333;
+      }
+      .error {
+        color: red;
+        margin-top: 10px;
+      }
+
+  body
+    .container
+      h1 Employee Login
+      form(action="/login/employee/login", method="POST")
+        div.form-group
+          label(for="username") Username:
+          input.form-control(type="text", id="username", name="username" required)
+        div.form-group
+          label(for="password") Password:
+          input.form-control(type="password", id="password", name="password" required)
+        input.btn.btn-success.btn-block(type="submit", value="Login")
+      if error
+        p.error= error
+
+    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js")

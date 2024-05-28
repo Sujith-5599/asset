@@ -1,0 +1,120 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Employee Display
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+      h1.employee-display-title {
+        text-align: center;
+        margin-top: 20px;
+        color: #333;
+      }
+      .container {
+        margin-top: 20px;
+      }
+      .assets-title {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+      table {
+        width: 100%;
+        margin-top: 20px;
+        table-layout: fixed; /* Ensure table cells have a fixed width */
+      }
+      th, td {
+        padding: 10px;
+        text-align: left;
+        overflow: hidden; /* Prevent text overflow */
+        text-overflow: ellipsis; /* Add ellipsis for overflow text */
+        white-space: nowrap; /* Prevent text wrap */
+      }
+      th.actions, td.product-details {
+        width: 220px; /* Adjust width as needed for actions column */
+      }
+      .product-image img {
+        max-width: 100px;
+        height: auto;
+      }
+      .btn-group {
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px;
+      }
+      .btn-group button, .btn-group form {
+        width: 100%; /* Ensure buttons and forms use full width */
+      }
+  body
+    header
+      h1.employee-display-title Asset Display
+    if success
+      script.
+        alert('Purchase successful!')
+    if returnSuccess
+      script.
+        alert('Return successful!')
+
+    .container
+      h2.assets-title Assets for Purchase
+      table.table.table-striped
+        thead.thead-dark
+          tr  
+            th Product Name
+            th Description
+            th Stock
+            th Available
+            th Image
+            th.actions Actions
+        tbody
+          each asset in assets
+            tr
+              td= asset.product_name
+              td= asset.description
+              td= asset.stock
+              td= asset.available ? 'Yes' : 'No'
+              td.product-image
+                if asset.image_upload
+                  img(src=`data:image/png;base64,${asset.image_upload.toString('base64')}`, alt='Product Image', class='img-fluid')
+                else
+                  span No image available
+              td.product-details
+                .btn-group
+                  if asset.available
+                    //- Only show the buy button if the asset is available
+                    button.btn.btn-primary(type='button', onclick=`showBuyInput('${asset.unique_id}')`) Buy
+                    div(id=`buyInputDiv-${asset.unique_id}`, style='display:none; margin-top:10px;')
+                      form(action=`/buy/${asset.unique_id}`, method='post')
+                        div.form-group
+                          input.form-control(type='text', name='id', placeholder='Enter Employee ID')
+                        button.btn.btn-success(type='submit') Confirm Purchase
+                  button.btn.btn-secondary(type='button', onclick=`showReturnInput('${asset.unique_id}')`) Return
+                  div(id=`returnInputDiv-${asset.unique_id}`, style='display:none; margin-top:10px;')
+                    form(action=`/return/${asset.unique_id}`, method='post')
+                      div.form-group
+                        input.form-control(type='text', name='reason', placeholder='Reason for return')
+                      div.form-group
+                        input.form-control(type='text', name='id', placeholder='Enter Employee ID')
+                      button.btn.btn-warning(type='submit') Confirm Return
+
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
+    script.
+      function showBuyInput(uniqueId) {
+        var inputDiv = document.getElementById('buyInputDiv-' + uniqueId);
+        inputDiv.style.display = 'block';
+      }
+      function showReturnInput(uniqueId) {
+        var inputDiv = document.getElementById('returnInputDiv-' + uniqueId);
+        inputDiv.style.display = 'block';
+      }
+
+  footer.text-center
+    p Copyright © 2024 Company. All Rights Reserved.

@@ -1,0 +1,112 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Admin Asset Management
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css")
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    style.
+      .navbar-custom {
+        background-color: #343a40;
+      }
+      .navbar-custom .navbar-brand,
+      .navbar-custom .nav-link {
+        color: #fff;
+      }
+      h1, h2 {
+        color: #333;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+  body
+    .container
+      nav.navbar.navbar-expand-lg.navbar-custom
+        a.navbar-brand(href="#") Admin Dashboard
+        button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse#navbarNav
+          ul.navbar-nav.mr-auto
+            li.nav-item
+              a.nav-link(href="/login/admin-editemployee") Employee
+            li.nav-item
+              a.nav-link(href="/login/admin-return") Asset Returned
+      h1.mb-4 Admin Asset
+      h2.mb-4 Asset List
+      table.table.table-striped
+        thead.thead-dark
+          tr
+            th Image
+            th Product Name
+            th Unique ID
+            th Description
+            th Stock
+            th Available
+            th Actions
+        tbody
+          each asset in assets
+            tr
+              td
+                //- img(src=`C:/Users/msuji/Desktop/asset-tracking/server/public/images/path/to;base64,${asset.image_upload}`, style="max-width: 100px; height: auto;")
+                img(src=`C:/Users/msuji/Desktop/asset-tracking/server/public/images/${asset.image_upload}`, style="max-width: 100px; height: auto;")
+              td= asset.product_name
+              td= asset.unique_id
+              td= asset.description
+              td= asset.stock
+              td= asset.available
+              td
+                form(id=`deleteForm-${asset.unique_id}`, action=`/editassetdetails/${asset.unique_id}`, method="post")
+                  input(type="hidden", name="_method", value="DELETE")
+                  button.btn.btn-danger(type="button", onclick=`deleteAsset('${asset.unique_id}')`)
+                    i.fa.fa-trash-alt
+                form(action=`/editassetdetails/${asset.unique_id}/update`, method="get")
+                  button.btn.btn-primary(type="submit") Update
+
+      h2.mb-4 Add New Asset
+      .form-container
+        form(action="/editassetdetails", method="post")
+          .form-group
+            label(for="product_name") Product Name:
+            input.form-control(type="text", id="product_name", name="product_name", required)
+          .form-group
+            label(for="unique_id") Unique ID:
+            input.form-control(type="text", id="unique_id", name="unique_id", required)
+          .form-group
+            label(for="description") Description:
+            input.form-control(type="text", id="description", name="description", required)
+          .form-group
+            label(for="stock") Stock:
+            input.form-control(type="number", id="stock", name="stock", required)
+          .form-group
+            input.form-check-input(type="checkbox", id="available", name="available", checked)
+            label(for="available") Available
+            
+           
+          .form-group
+            label(for="image_upload") Image upload :
+            input.form-control-file(type="file", id="image_upload", name="image_upload")
+          input.btn.btn-success(type="submit", value="Add Asset")
+
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
+    script.
+      function deleteAsset(unique_id) {
+        if (confirm('Are you sure you want to delete this asset?')) {
+          fetch(`/editassetdetails/${unique_id}`, {
+            method: 'DELETE'
+          })
+          .then(response => {
+            if (response.ok) {
+              location.reload();
+            } else {
+              throw new Error('Failed to delete asset');
+            }
+          })
+          .catch(error => {
+            console.error('Error deleting asset:', error);
+          });
+        }
+      }

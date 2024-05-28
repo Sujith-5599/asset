@@ -1,0 +1,57 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Home
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
+    style.
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        text-align: center;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        margin-bottom: 20px;
+        font-weight: 600;
+        color: #333;
+      }
+      .btn-group {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+      .btn {
+        width: 120px;
+        font-size: 16px;
+        padding: 10px;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+  body
+    img(src='data:image/jpeg;base64,YourBase64EncodedImageHere', alt='Description of the image')
+
+    .container
+      
+      h1 Login Here
+      .btn-group
+        a.btn.btn-primary(href="/login/admin") Admin
+        a.btn.btn-secondary(href="/login/employee") Employee
+
+    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js")
